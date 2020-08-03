@@ -1,0 +1,30 @@
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: cannot open output file c:\Users\kosuke\Desktop\c++\ABC166\d.exe: Permission denied
+collect2.exe: error: ld returned 1 exit status
+ターミナルの処理が終了しました (終了コード: 1)
+
+のエラーは、作ろうとしているファイルが実行中の時出るエラーです。
+
+ターミナルでファイルが実行中ならとめればいいけど、止まってる場合の時はめんどくさいのでその対処法を下に書きます。
+
+tasklist /fi "imagename eq .exe"
+taskkill /f /pid num
+
+// 上の行のnumは2つ上の行で見つけたプロセスのpidです。
+
+
+2
+001137565660 1000
+78722
+start
+0011375656600
+0278722020000
+end
+start
+0011375656602
+end
+start
+001137565660002002
+end
+start
+001137565660040004
+end
