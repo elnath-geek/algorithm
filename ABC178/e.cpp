@@ -44,14 +44,6 @@ const ll mod = 1e9 + 7;
 int dx[4] = {1, 0, -1, 0};
 int dy[4] = {0, 1, 0, -1};
 
-ll gcd(ll a, ll b){
-    if(a%b == 0){
-        return b;
-    }else{
-        return gcd(b, a%b);
-    }
-}
-
 // mod.m での a の逆元 a^(-1) を計算する。
 ll modinv(ll a, ll m) {
     ll b = m, u = 1, v = 0;
@@ -77,50 +69,20 @@ ll modpow(ll a, ll n){
     return res;
 }
 
-bool minPrime[1000010];
-
-void eratosthenes(){
-    rep(i,1000010) minPrime[i] = 1;
-    minPrime[0] = minPrime[1] = 0;
-    rep(i,1000010){
-        if(minPrime[i] == 1){
-            for(int j=i; j<1000010; j+=i){
-                minPrime[j] = i;
-            }
-        }
-    }
-}
 
 int main(){
     int n;
     cin >> n;
-    vint a(n);
-    rep(i, n) cin >> a[i];
-
-    eratosthenes();
-    bool pairwiseFlag=1;
-    set<int> primes;
+    vll xpy, xmy;
     rep(i,n){
-        int tmp = a[i];
-        while(tmp > 1){
-            if(primes.count(minPrime[tmp]) == 1){
-                pairwiseFlag = 0;
-                break;
-            }
-            primes.insert(minPrime[tmp]);
-            tmp = minPrime[tmp];
-        }
+        ll x, y;
+        cin >> x >> y;
+        xpy.pb(x+y);
+        xmy.pb(x-y);
     }
-
-    int allgcd = a[0];
-    rep(i,n) allgcd = gcd(allgcd, a[i]);
-
-    if(pairwiseFlag){
-        cout << "pairwise coprime" << endl;
-    } else if(allgcd == 1){
-        cout << "setwise coprime" << endl;
-    } else {
-        cout << "not coprime" << endl;
-    }
+    sort(all(xpy));
+    sort(all(xmy));
+    ll ans = max(xpy[n-1] - xpy[0], xmy[n-1] - xmy[0]);
+    cout << ans << endl;
 }
 
