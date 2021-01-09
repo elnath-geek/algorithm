@@ -70,7 +70,23 @@ ll modpow(ll a, ll n){
 }
 
 
-int main(){
-    cout << "test" << endl;
+const int N = 10000;
+const double TRIAL_COUNT = 10000;
+int flag[N] = {0};
+
+int main(int argc, char *argv[]){
+    double ans=0;
+    rep(i, TRIAL_COUNT){
+        rep(j, atoi(argv[1])*N){
+            flag[rand()%N]++;
+        }
+        rep(j, N){
+            if(flag[j] == 1){
+                ans++;
+            }
+            flag[j] = 0;
+        }
+    }
+    printf("E = %f", ans/TRIAL_COUNT/N);
 }
 
